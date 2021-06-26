@@ -43,9 +43,9 @@
                                                                                         title="@Html.DisplayFor(modelItem => item.Nome)" /></a>    
             </td>
             <td>
-                <a class="textoCor" asp-action="Edit" asp-route-id="@item.IdLoja">Editar</a> |
-                <a class="textoCor" asp-action="Details" asp-route-id="@item.IdLoja">Detalhes</a> |
-                <a class="textoCor" asp-action="Delete" asp-route-id="@item.IdLoja">Eliminar</a>
+                <a hidden class="textoCor" asp-action="Edit" asp-route-id="@item.IdLoja">Editar</a> |
+                <a hidden class="textoCor" asp-action="Details" asp-route-id="@item.IdLoja">Detalhes</a> |
+                <a hidden class="textoCor" asp-action="Delete" asp-route-id="@item.IdLoja">Eliminar</a>
             </td>
         </tr>
 }

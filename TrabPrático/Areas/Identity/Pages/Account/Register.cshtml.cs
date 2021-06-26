@@ -80,9 +80,9 @@ namespace TrabPrático.Areas.Identity.Pages.Account
             public DateTime DataNascimento { get; set; }
 
             /// <summary>
-            /// atributo para recolher os dados do criador que está a criar a conta
+            /// atributo para recolher os dados do utilizador que está a criar a conta
             /// </summary>
-            public Utilizador utilizador { get; set; }
+            public Utilizador Utilizador { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -128,26 +128,26 @@ namespace TrabPrático.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     // se aqui cheguei, é pq foi criado com sucesso o novo utilizador
-                    // primeiro q tudo, vou adicionar esse novo utilizador ao Role 'Criador'
-                    // depois, é preciso guardar os dados do novo Criador
-                    //   -- é preciso obter os dados do Criador
+                    // primeiro q tudo, vou adicionar esse novo utilizador ao Role 'Utilizador'
+                    // depois, é preciso guardar os dados do novo Utilizador
+                    //   -- é preciso obter os dados do Utilizador
                     //   -- guardá-los na base de dados
 
 
                     try
                     {
                         // adicionar ao Role
-                        await _userManager.AddToRoleAsync(user, "Criador");
+                        await _userManager.AddToRoleAsync(user, "Utilizador");
 
-                        // recuperar os dados do Criador
-                        // atribuir ao Criador o email que será usado na autenticação
-                        Input.utilizador.Email = Input.Email;
-                        // atribuir ao Criador o ID do user q acabou de se criar
-                        Input.utilizador.UserNameID = user.Id;
+                        // recuperar os dados do Utilizador
+                        // atribuir ao Utilizador o email que será usado na autenticação
+                        Input.Utilizador.Email = Input.Email;
+                        // atribuir ao Utilizador o ID do user q acabou de se criar
+                        Input.Utilizador.UserNameID = user.Id;
 
 
                         // guardar os dados na BD
-                        await _db.AddAsync(Input.utilizador);
+                        await _db.AddAsync(Input.Utilizador);
 
                         // consolidar a operação de guardar
                         await _db.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace TrabPrático.Areas.Identity.Pages.Account
                     }
                     catch (Exception)
                     {
-                        // houve um erro na criação de um Criador
+                        // houve um erro na criação de um Utilizador
                         // Além da mensagem de erro,
                         ModelState.AddModelError("", "Houve um erro com a criação do utilizador");
                         //  deverá ser apagada o User q foi previamente criado
